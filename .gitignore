@@ -1,0 +1,54 @@
+# LaTeX auxiliary and build artifacts (keep intended final PDFs)
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.xdv
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+_minted-*/
+
+# Python / notebooks
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Editor and operating system
+.vscode/
+.idea/
+.DS_Store
+*~
+*.swp
+
+# Fonts from third-party proprietary packages: keep local; document setup instead
+# **/fonts/
+
+# Large or generated model files (add exceptions when intentionally distributing)
+*.ckpt
+*.pt
+*.pth
