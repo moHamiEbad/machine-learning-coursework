@@ -11,7 +11,8 @@
     unicode=true,
     bookmarks=true,
     bookmarksopen=true,
-    bookmarksnumbered=false,
+    bookmarksnumbered=true,
+    bookmarksopenlevel=3,
     hidelinks
 ]{hyperref}
 \usepackage{bookmark}
@@ -85,27 +86,16 @@
     before skip=8pt,after skip=11pt
 }
 
-\newcommand{\questionheading}[3]{%
-    \par\vspace{1.4em}%
-    \pdfbookmark[1]{پرسش #2: #3}{question-#1}%
-    \noindent
-    {\color{accent}\bfseries\large #2}%
-    \hspace{0.75em}%
-    {\color{ink}\bfseries\large #3}%
-    \par\vspace{0.20em}%
-    {\color{rulecolor}\hrule height 0.7pt}%
-    \nobreak
-}
+% The sectioning commands generate both numbering and clickable PDF bookmarks.
+% Article class: section = question, subsection = topic,
+% subsubsection = proof or a smaller conceptual part.
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\bookmarksetup{open,depth=3,numbered}
 
 \newcommand{\answerheading}{%
     \par\vspace{0.10em}%
     {\color{accent}\bfseries پاسخ}\par\vspace{-0.2em}%
-}
-
-% Standalone, readable subsection headings (unlike run-in \paragraph).
-\newcommand{\answersection}[1]{%
-    \par\medskip\noindent
-    {\color{ink}\bfseries #1}\par\nobreak\smallskip
 }
 
 \begin{document}
@@ -138,13 +128,13 @@
 {\color{rulecolor}\hrule height 0.6pt}
 
 % ====================== Question 1 ======================
-\questionheading{1}{۱}{انواع یادگیری}
+\section{انواع یادگیری}
 \begin{promptbox}
 توضیح انواع یادگیری‌ها، به‌جز یادگیری تقویتی، به‌صورت مفهومی به همراه مثال.
 \end{promptbox}
 \answerheading
 
-\subsection*{\en{Supervised Learning}}
+\subsection{\texorpdfstring{\en{Supervised Learning}}{Supervised Learning}}
 
 % IMPORTANT: B Mitra supports U+06C0 but lacks U+0654.
 % We therefore use the font-compatible single character «ۀ» in
@@ -168,7 +158,7 @@
     هدف مدل، تعیین کلاس مناسب برای هر ورودی جدید است.
 \end{itemize}
 
-\answersection{تمایز مفهومی رگرسیون و دسته‌بندی}
+\subsubsection{تمایز مفهومی رگرسیون و دسته‌بندی}
 در رگرسیون، مقدار پیش‌بینی‌شده لزوماً نباید یکی از مقادیر
 مشاهده‌شده در مجموعۀ آموزشی باشد؛ برای مثال، مدل می‌تواند
 مقداری میان دو مقدار آموزشی یا حتی خارج از بازۀ آن‌ها پیش‌بینی کند.
@@ -176,7 +166,7 @@
 یکی از کلاس‌های تعریف‌شده برای مسئله باشد و نمی‌تواند
 کلاس جدیدی خارج از این مجموعه ایجاد کند.
 
-\answersection{مثال‌ها}
+\subsubsection{مثال‌ها}
 \begin{itemize}
     \item \textbf{رگرسیون:}
     پیش‌بینی قیمت یک خانه بر اساس متراژ، موقعیت مکانی
@@ -192,7 +182,7 @@
 
 
 
-\subsection*{\en{Unsupervised Learning}}
+\subsection{\texorpdfstring{\en{Unsupervised Learning}}{Unsupervised Learning}}
 
 در یادگیری بدون نظارت، برخلاف یادگیری نظارت‌شده، داده‌های آموزشی
 فاقد برچسب یا مقدار هدف مشخص هستند. در این نوع یادگیری،
@@ -221,8 +211,7 @@
     هر نمونه در نواحی کم‌تراکم، ناهنجار نیست.
 \end{itemize}
 
-\par\medskip
-\noindent{\bfseries مثال‌ها}\par\smallskip
+\subsubsection{مثال‌ها}
 
 \begin{itemize}
     \item \textbf{خوشه‌بندی:}
@@ -247,7 +236,7 @@
 
 % ============== Semi-supervised Learning ==============
 
-\subsection*{\en{Semi-supervised Learning}}
+\subsection{\texorpdfstring{\en{Semi-supervised Learning}}{Semi-supervised Learning}}
 
 در یادگیری نیمه‌نظارت‌شده، مجموعه‌داده آموزشی شامل
 تعداد محدودی از نمونه‌های برچسب‌دار و تعداد بیشتری
@@ -273,10 +262,7 @@
 از شباهت میان نمونه‌ها یا سازگاری پیش‌بینی‌های
 مدل در برابر تغییرات کوچک ورودی استفاده می‌کنند.
 
-\par\medskip
-\noindent
-{\bfseries تمایز با یادگیری نظارت‌شده}
-\par\smallskip
+\subsubsection{تمایز با یادگیری نظارت‌شده}
 
 در یادگیری نظارت‌شده، تابع یادگیری
 با استفاده از نمونه‌های برچسب‌دار آموزش می‌بیند؛
@@ -290,8 +276,7 @@
 لزوماً صحیح نیستند و نباید با برچسب‌های
 واقعی یکسان در نظر گرفته شوند.
 
-\par\medskip
-\noindent{\bfseries مثال}\par\smallskip
+\subsubsection{مثال}
 
 فرض کنید بیمارستانی یک میلیون تصویر رادیولوژی
 از قفسه سینه در اختیار دارد، اما تنها دو هزار تصویر
@@ -305,7 +290,7 @@
 
 % ============== Self-supervised Learning ==============
 
-\subsection*{\en{Self-supervised Learning}}
+\subsection{\texorpdfstring{\en{Self-supervised Learning}}{Self-supervised Learning}}
 
 در یادگیری خودنظارت‌شده، برخلاف یادگیری
 نظارت‌شده، نیازی به برچسب‌گذاری دستی
@@ -324,8 +309,7 @@
 از داده‌ها است که بتوان از آن‌ها
 در مسائل دیگر نیز استفاده کرد.
 
-\par\medskip
-\noindent{\bfseries مثال}\par\smallskip
+\subsubsection{مثال}
 
 در آموزش مدل‌های زبانی، می‌توان بخشی
 از یک جمله را در اختیار مدل قرار داد
@@ -342,7 +326,8 @@
 به پرسش‌ها استفاده کرد.
 
 % ====================== Question 2 ======================
-\questionheading{2}{۲}{ تعداد پارامترهای چندجمله‌ای}
+
+\section{تعداد پارامترهای چندجمله‌ای}
 \begin{promptbox}
 تعداد پارامتر‌های چندجمله‌ای درجه $M$ در فضای $D$ بعدی و تحلیل رفتار آن با افزایش بعد.
 \end{promptbox}
@@ -352,37 +337,185 @@
 % پاسخ پرسش دوم: تعداد پارامترهای چندجمله‌ای
 % ==========================================
 
-\subsection*{شمارش پارامترهای یک چندجمله‌ای در فضای چندبعدی}
+\subsection{فرمول‌بندی چندجمله‌ای در فضای چندبعدی}
 
-فرض کنید بردار ورودی
+فرض کنید $D\geq1$ و $M\geq0$ اعداد صحیح باشند و
+بردار ورودی
 $\mathbf{x}=(x_1,\ldots,x_D)\in\mathbb{R}^D$
-باشد. یک چندجمله‌ای عمومی از درجه حداکثر
-$M$ در این فضا را می‌توان به صورت زیر نوشت:
+باشد. یک چندجمله‌ای عمومی با \textbf{درجه کل حداکثر $M$}
+را می‌توان به صورت
 
 \[
 f(\mathbf{x})=
-\sum_{\substack{\alpha_1,\ldots,\alpha_D\geq 0\\
-                 \alpha_1+\cdots+\alpha_D\leq M}}
-w_{\boldsymbol{\alpha}}
-\prod_{j=1}^{D}x_j^{\alpha_j},
+\sum_{\substack{\boldsymbol{\alpha}\in\mathbb{Z}_{\geq0}^{D}\\
+                 |\boldsymbol{\alpha}|\leq M}}
+w_{\boldsymbol{\alpha}}\,\mathbf{x}^{\boldsymbol{\alpha}}
 \]
 
-که در آن
-$\boldsymbol{\alpha}=(\alpha_1,\ldots,\alpha_D)$
-یک بردار با مؤلفه‌های صحیح نامنفی است و
-$w_{\boldsymbol{\alpha}}$
-ضریب متناظر با هر تک‌جمله‌ای است.
+نوشت، که در آن
 
-از آنجا که تک‌جمله‌ای‌های متمایز از نظر جبری
-مستقل خطی هستند، تعداد پارامترهای مستقل
-برابر با تعداد بردارهای
-$\boldsymbol{\alpha}$
-است که در شرط درجه صدق می‌کنند.
+\[
+\boldsymbol{\alpha}=(\alpha_1,\ldots,\alpha_D),\qquad
+|\boldsymbol{\alpha}|=\sum_{j=1}^{D}\alpha_j,\qquad
+\mathbf{x}^{\boldsymbol{\alpha}}=\prod_{j=1}^{D}x_j^{\alpha_j}.
+\]
 
-\par\medskip
-\noindent
-{\bfseries گام اول: شمارش جملات با درجه دقیقاً $m$}
-\par\smallskip
+تمام توان‌ها اعداد صحیح نامنفی هستند؛ زیرا در تعریف
+چندجمله‌ای، توان منفی وجود ندارد. هر بردار توان
+$\boldsymbol{\alpha}$ یک \textbf{تک‌جمله‌ای متمایز}
+را مشخص می‌کند. برای مثال، $x_1x_2$ و $x_2x_1$
+هر دو به بردار $\boldsymbol{\alpha}=(1,1)$ مربوط‌اند
+و نباید دو بار شمرده شوند.
+
+\subsection{قضیه: تک‌جمله‌ای‌های متمایز یک پایه تشکیل می‌دهند}
+
+فضای برداری چندجمله‌ای‌های حقیقی با درجه کل حداکثر $M$
+را چنین تعریف می‌کنیم:
+
+\[
+\mathcal{P}_{D,M}
+=\bigl\{p\in\mathbb{R}[x_1,\ldots,x_D]:\deg p\leq M\bigr\}.
+\]
+
+\textbf{قضیه.}
+مجموعه
+
+\[
+\mathcal{B}_{D,M}
+=\left\{
+\mathbf{x}^{\boldsymbol{\alpha}}:
+\boldsymbol{\alpha}\in\mathbb{Z}_{\geq0}^{D},\;
+|\boldsymbol{\alpha}|\leq M
+\right\}
+\]
+
+یک پایه برای $\mathcal{P}_{D,M}$ است.
+
+\subsubsection{اثبات پوشا بودن}
+
+طبق تعریف چندجمله‌ای، هر عضو $\mathcal{P}_{D,M}$
+ترکیبی خطی و متناهی از تک‌جمله‌ای‌های مجموعه
+$\mathcal{B}_{D,M}$ است؛ پس
+
+\[
+\operatorname{span}(\mathcal{B}_{D,M})
+=\mathcal{P}_{D,M}.
+\]
+
+\subsubsection{اثبات استقلال خطی با استقرا}
+
+نشان می‌دهیم اگر یک ترکیب خطی از تک‌جمله‌ای‌های
+متمایز روی تمام $\mathbb{R}^{D}$ صفر باشد،
+تمام ضرایب آن صفرند. اثبات با استقرا بر تعداد
+متغیرها $D$ انجام می‌شود.
+
+\textbf{پایه استقرا:} $(D=1)$.
+اگر چندجمله‌ای تک‌متغیره
+
+\[
+p(x)=\sum_{k=0}^{M}c_kx^k
+\]
+
+برای تمام $x\in\mathbb{R}$ صفر باشد،
+بی‌نهایت ریشه دارد. از آنجا که یک چندجمله‌ای
+ناصفر از درجه حداکثر $M$ بیش از $M$ ریشه متمایز
+ندارد، باید همه ضرایب $c_k$ صفر باشند.
+
+\textbf{گام استقرا.}
+فرض کنید ادعا برای چندجمله‌ای‌های $D-1$ متغیره
+درست باشد. اگر چندجمله‌ای $D$ متغیره
+$p(\mathbf{x})$ برای تمام $\mathbf{x}\in\mathbb{R}^{D}$
+صفر باشد، آن را برحسب توان‌های $x_D$ می‌نویسیم:
+
+\[
+p(x_1,\ldots,x_D)
+=\sum_{k=0}^{M}x_D^k\,
+q_k(x_1,\ldots,x_{D-1}),
+\]
+
+که هر $q_k$ چندجمله‌ای با حداکثر $D-1$ متغیر
+و درجه کل حداکثر $M-k$ است.
+هر مقدار ثابت دلخواه برای
+$(x_1,\ldots,x_{D-1})$ در نظر بگیرید.
+عبارت بالا نسبت به $x_D$ یک چندجمله‌ای تک‌متغیره
+است که برای \textbf{تمام} $x_D\in\mathbb{R}$ صفر می‌شود.
+پس طبق حالت پایه، تمام ضرایب آن باید صفر باشند:
+
+\[
+q_k(x_1,\ldots,x_{D-1})=0,
+\qquad k=0,\ldots,M.
+\]
+
+چون مقادیر $(x_1,\ldots,x_{D-1})$ دلخواه بودند،
+هر $q_k$ روی کل $\mathbb{R}^{D-1}$ همانی صفر است.
+با فرض استقرا، همه ضرایب تک‌جمله‌ای‌های هر $q_k$
+صفرند؛ بنابراین تمام ضرایب $p$ نیز صفر هستند.
+
+پس تک‌جمله‌ای‌های متمایز مستقل خطی‌اند و به همراه
+خاصیت پوشا بودن، نتیجه می‌گیریم
+
+\begin{center}
+\fbox{\strut
+    $\mathcal{B}_{D,M}$
+    یک پایه برای
+    $\mathcal{P}_{D,M}$
+    است.
+}
+\end{center}
+
+\subsection{یکتایی نمایش و نبود پارامترهای تکراری}
+
+اکنون باید نشان دهیم که شمارش عناصر این پایه
+دقیقاً تعداد \textbf{پارامترهای مستقل} را می‌دهد.
+فرض کنید یک چندجمله‌ای، دو نمایش با ضرایب متفاوت
+روی پایه $\mathcal{B}_{D,M}$ داشته باشد:
+
+\[
+\sum_{\boldsymbol{\alpha}}a_{\boldsymbol{\alpha}}
+\mathbf{x}^{\boldsymbol{\alpha}}
+=
+\sum_{\boldsymbol{\alpha}}b_{\boldsymbol{\alpha}}
+\mathbf{x}^{\boldsymbol{\alpha}},
+\qquad\forall\mathbf{x}\in\mathbb{R}^{D},
+\]
+
+که هر دو مجموع روی بردارهای توان مجاز گرفته شده‌اند.
+با تفریق دو طرف خواهیم داشت:
+
+\[
+\sum_{\boldsymbol{\alpha}}
+(a_{\boldsymbol{\alpha}}-b_{\boldsymbol{\alpha}})
+\mathbf{x}^{\boldsymbol{\alpha}}=0.
+\]
+
+از استقلال خطی اعضای پایه نتیجه می‌شود
+
+\begin{center}
+\fbox{\strut
+    $a_{\boldsymbol{\alpha}}=b_{\boldsymbol{\alpha}}$
+    \quad برای هر
+    $\boldsymbol{\alpha}$
+}
+\end{center}
+
+بنابراین هر چندجمله‌ای دقیقاً یک بردار ضرایب
+در این پایه دارد و هیچ ضریب زائدی شمرده نمی‌شود.
+از سوی دیگر، چون پایه کل فضا را پوشش می‌دهد،
+هیچ چندجمله‌ای ممکنی نیز از شمارش حذف نشده است.
+در نتیجه
+
+\[
+\boxed{
+P(D,M)=\dim\mathcal{P}_{D,M}
+=|\mathcal{B}_{D,M}|
+=\#\!\left\{\boldsymbol{\alpha}\in\mathbb{Z}_{\geq0}^{D}:
+|\boldsymbol{\alpha}|\leq M\right\}.
+}
+\]
+
+اکنون کافی است تعداد بردارهای توان مجاز را بشماریم.
+
+\subsection{گام اول: شمارش تک‌جمله‌ای‌های هم‌درجه}
 
 ابتدا تعداد تک‌جمله‌ای‌هایی را محاسبه می‌کنیم
 که مجموع توان‌های آن‌ها دقیقاً برابر $m$ باشد.
@@ -414,10 +547,7 @@ $m$ ستاره را در یک ردیف قرار دهیم.
 جایگاه‌های $D-1$ میله، یک‌به‌یک معادل
 انتخاب جواب‌های معادله است.
 
-\par\medskip
-\noindent
-{\bfseries گام دوم: شمارش تمام پارامترها تا درجه $M$}
-\par\smallskip
+\subsection{گام دوم: شمارش کل پارامترها}
 
 چندجمله‌ای درجه حداکثر $M$ شامل
 تمام جملات با درجه‌های صفر تا $M$ است.
@@ -475,16 +605,13 @@ P(D,M)=\binom{D+M}{M}
 % تحلیل رشد تعداد پارامترها
 % ==========================================
 
-\subsection*{تحلیل رشد تعداد پارامترها با افزایش بعد}
+\subsection{تحلیل رشد تعداد پارامترها با افزایش بعد}
 
 برای بررسی ارتباط تعداد پارامترها با بعد
 فضای ورودی، باید میان حالت‌های مختلف
 رشد $D$ و $M$ تمایز قائل شویم.
 
-\par\medskip
-\noindent
-{\bfseries حالت اول: درجه $M$ ثابت و بعد $D$ متغیر}
-\par\smallskip
+\subsubsection{حالت اول: درجه \texorpdfstring{$M$}{M} ثابت و بعد \texorpdfstring{$D$}{D} متغیر}
 
 رابطه به‌دست‌آمده را می‌توان به شکل زیر نوشت:
 
@@ -535,10 +662,7 @@ P(100,3)&=\binom{103}{3}=176851.
 افزایش می‌یابد؛ حتی با ثابت ماندن درجه
 چندجمله‌ای.
 
-\par\medskip
-\noindent
-{\bfseries حالت دوم: افزایش هم‌زمان درجه و بعد}
-\par\smallskip
+\subsubsection{حالت دوم: افزایش هم‌زمان درجه و بعد}
 
 اگر درجه چندجمله‌ای نیز متناسب با بعد
 افزایش یابد، ممکن است رشد پارامترها
@@ -596,7 +720,7 @@ $M$ نسبت به $D$ وابسته است.
 % ارتباط با تعداد نمونه‌های آموزشی
 % ==========================================
 
-\subsection*{ارتباط تعداد پارامترها با تعداد نمونه‌های آموزشی}
+\subsection{ارتباط تعداد پارامترها با تعداد نمونه‌های آموزشی}
 
 اکنون فرض کنید مجموعه آموزشی شامل
 $N$ نمونه باشد:
@@ -726,7 +850,7 @@ $\mathbf{v}$
 % ارتباط با نفرین ابعاد
 % ==========================================
 
-\subsection*{نتیجه‌گیری و ارتباط با نفرین ابعاد}
+\subsection{نتیجه‌گیری و ارتباط با نفرین ابعاد}
 
 نتیجه اصلی این است که با افزایش بعد
 فضای ورودی، تعداد تک‌جمله‌ای‌های ممکن
@@ -784,7 +908,7 @@ N\approx r\,k^D.
 % پرسش سوم: VC Dimension
 % ==========================================
 
-\questionheading{3}{۳}{بعد وی‌سی و ظرفیت تعمیم}
+\section{بعد وی‌سی و ظرفیت تعمیم}
 
 \begin{promptbox}
 بعد وی‌سی \en{(VC Dimension)} چیست؟
@@ -797,7 +921,7 @@ N\approx r\,k^D.
 % 1. Introduction and formal definitions
 % ==========================================
 
-\subsection*{تعریف ریاضی بعد وی‌سی}
+\subsection{تعریف ریاضی بعد وی‌سی}
 
 در یادگیری ماشین، یکی از مسائل اساسی،
 سنجش ظرفیت یا توان بیان یک خانواده از مدل‌ها است.
@@ -863,11 +987,7 @@ h\in\mathcal{H}
 |\mathcal{H}(S)|\leq 2^n.
 \]
 
-\par\medskip
-\noindent
-{\bfseries تعریف اول: شکستن کامل یک مجموعه
-\en{(Shattering)}}
-\par\smallskip
+\subsubsection{شکستن کامل یک مجموعه \texorpdfstring{\en{Shattering}}{Shattering}}
 
 می‌گوییم کلاس فرضیه $\mathcal{H}$
 مجموعه $S$ را
@@ -902,10 +1022,7 @@ h(\mathbf{x}_i)=y_i
 این فرضیه می‌تواند برای برچسب‌گذاری‌های
 مختلف، متفاوت باشد.
 
-\par\medskip
-\noindent
-{\bfseries تعریف دوم: بعد وی‌سی}
-\par\smallskip
+\subsubsection{تعریف بعد وی‌سی}
 
 بعد وی‌سی کلاس فرضیه $\mathcal{H}$،
 بزرگ‌ترین تعداد نقاطی است که
@@ -960,7 +1077,7 @@ $d+1$ نقطه متمایز قابل شکستن نیست.
 % 2. Example: threshold classifiers
 % ==========================================
 
-\subsection*{مثال اول: دسته‌بندهای آستانه‌ای}
+\subsection{مثال اول: دسته‌بندهای آستانه‌ای}
 
 کلاس فرضیه زیر را روی محور حقیقی
 در نظر بگیرید:
@@ -985,8 +1102,7 @@ t\in\mathbb{R}
 }
 \]
 
-\par\smallskip
-\noindent{\bfseries اثبات کران پایین.}
+\subsubsection{اثبات کران پایین}
 یک نقطه دلخواه $x_1$ را در نظر بگیرید.
 
 با انتخاب $t>x_1$،
@@ -1001,8 +1117,7 @@ t\in\mathbb{R}
 \geq 1.
 \]
 
-\par\smallskip
-\noindent{\bfseries اثبات کران بالا.}
+\subsubsection{اثبات کران بالا}
 دو نقطه متمایز دلخواه $x_1<x_2$
 را در نظر بگیرید.
 
@@ -1047,7 +1162,7 @@ h_t(x_2)=0.
 % 3. Affine linear classifiers
 % ==========================================
 
-\subsection*{مثال دوم: دسته‌بندهای خطی در فضای چندبعدی}
+\subsection{مثال دوم: دسته‌بندهای خطی در فضای چندبعدی}
 
 کلاس تمام دسته‌بندهای خطی آفین
 در فضای $\mathbb{R}^{D}$ را در نظر بگیرید:
@@ -1078,8 +1193,7 @@ b\in\mathbb{R}
 }
 \]
 
-\par\medskip
-\noindent{\bfseries اثبات کران پایین.}
+\subsubsection{اثبات کران پایین}
 نقاط زیر را انتخاب می‌کنیم:
 
 \[
@@ -1125,8 +1239,7 @@ w_i=s_i-s_0.
 \geq D+1.
 \]
 
-\par\medskip
-\noindent{\bfseries اثبات کران بالا.}
+\subsubsection{اثبات کران بالا}
 اکنون هر مجموعه دلخواه از
 $D+2$ نقطه را در نظر بگیرید.
 
@@ -1222,7 +1335,7 @@ b\sum_{i=1}^{D+2}a_i\\
 % 4. Growth function and Sauer-Shelah
 % ==========================================
 
-\subsection*{تابع رشد و لم زائر--شلاه}
+\subsection{تابع رشد و لم ساوئر و شلاه}
 
 بعد وی‌سی تنها مشخص می‌کند
 بزرگ‌ترین مجموعه قابل شکستن چه اندازه‌ای دارد.
@@ -1260,7 +1373,7 @@ $d$ باشد، برای $n\leq d$ داریم:
 اما برای $n>d$،
 همه برچسب‌گذاری‌ها قابل تحقق نیستند.
 
-لم زائر--شلاه
+لم ساوئر و شلاه
 \en{(Sauer--Shelah Lemma)}
 بیان می‌کند که اگر
 $\operatorname{VCdim}(\mathcal{H})=d<\infty$،
@@ -1300,7 +1413,7 @@ $\operatorname{VCdim}(\mathcal{H})=d<\infty$،
 % 5. VC dimension and generalization
 % ==========================================
 
-\subsection*{ارتباط بعد وی‌سی با تعمیم‌پذیری}
+\subsection{ارتباط بعد وی‌سی با تعمیم‌پذیری}
 
 اهمیت آماری بعد وی‌سی از ارتباط آن
 با تفاوت میان خطای آموزشی و خطای واقعی
@@ -1358,7 +1471,7 @@ h(\mathbf{x}_i)\neq y_i
 با فرض
 $d=\operatorname{VCdim}(\mathcal{H})$
 و $N\geq d\geq1$،
-می‌توان از لم زائر--شلاه استفاده کرد:
+می‌توان از لم ساوئر و شلاه استفاده کرد:
 
 \[
 \Pi_{\mathcal{H}}(2N)
@@ -1405,7 +1518,7 @@ d\ln\left(\frac{2eN}{d}\right)
 % 6. Connection to Question 2
 % ==========================================
 
-\subsection*{ارتباط با چندجمله‌ای‌ها و نفرین ابعاد}
+\subsection{ارتباط با چندجمله‌ای‌ها و نفرین ابعاد}
 
 در پرسش دوم نشان دادیم که تعداد
 ضرایب مستقل یک چندجمله‌ای
@@ -1446,8 +1559,7 @@ h_p(\mathbf{x})
 }
 \]
 
-\par\medskip
-\noindent{\bfseries اثبات.}
+\par\medskip\noindent\textbf{اثبات.}
 فرض کنید
 
 \[
@@ -1471,8 +1583,7 @@ p(\mathbf{x})
 \boldsymbol{\theta}\in\mathbb{R}^{P}.
 \]
 
-\par\smallskip
-\noindent{\bfseries کران بالا.}
+\subsubsection{کران بالا}
 
 اگر مؤلفه ثابت را جدا کنیم،
 این دسته‌بند به یک دسته‌بند
@@ -1492,8 +1603,7 @@ $\mathbb{R}^{P-1}$ برابر $P$ است،
 \leq P.
 \]
 
-\par\smallskip
-\noindent{\bfseries کران پایین.}
+\subsubsection{کران پایین}
 
 تک‌جمله‌ای‌های متمایز، به عنوان
 توابع حقیقی روی $\mathbb{R}^{D}$،
@@ -1595,8 +1705,7 @@ P(D,M)
 }
 \]
 
-\par\medskip
-\noindent{\bfseries ارتباط با نفرین ابعاد.}
+\subsubsection{ارتباط با نفرین ابعاد}
 این برابری نشان می‌دهد که
 در کلاس کامل دسته‌بندهای چندجمله‌ای،
 افزایش تعداد پارامترها مستقیماً
@@ -1645,7 +1754,7 @@ P(D,M)
 % 7. Conclusion
 % ==========================================
 
-\subsection*{جمع‌بندی}
+\subsection{جمع‌بندی}
 
 بعد وی‌سی، بیشترین تعداد نقاطی است
 که یک کلاس فرضیه می‌تواند تمام
